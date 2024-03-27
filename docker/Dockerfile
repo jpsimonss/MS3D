@@ -39,7 +39,7 @@ RUN PIP_INSTALL="python3 -m pip --no-cache-dir install" && \
 # RUN pip install --user torch==1.8.1 torchvision==0.9.1 -f https://download.pytorch.org/whl/cu111/torch_stable.html && \
     #pip install torch-scatter==2.1.0
 # RUN pip3 install --no-cache-dir torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
-RUN pip3 install --no-cache-dir torch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 -f https://data.pyg.org/whl/torch-1.12.1+cu113.html && \
+RUN pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113 && \
     pip install torch-scatter==2.1.0 -f https://data.pyg.org/whl/torch-1.12.1+cu113.html
 
 # Install python packages
