@@ -29,6 +29,7 @@ def write_version_to_file(version, target_file):
 
 if __name__ == '__main__':
     version = '0.6.0+%s' % get_git_commit_number()
+    print(f'{version =}')
     write_version_to_file(version, 'pcdet/version.py')
 
     setup(
@@ -36,9 +37,9 @@ if __name__ == '__main__':
         version=version,
         description='OpenPCDet is a general codebase for 3D object detection from point cloud',
         install_requires=[
-            'numpy',
-            'llvmlite',
-            'numba',
+            'numba==0.58.1',
+            'numpy==1.24.4',
+            'llvmlite==0.41.1',
             'tensorboardX',
             'easydict',
             'pyyaml',

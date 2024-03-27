@@ -185,6 +185,11 @@ def refine_ped_labels(tracks_ped, ped_pos_th, track_filtering_cfg, s2e_th=2):
                 del tracks_ped[trk_id]
     return tracks_ped
 
+'''NEW by JP'''
+def refine_cyclist_labels():
+    pass
+'''NEW by JP'''
+
 def select_ps_by_th(ps_dict, pos_th):
     """
     Select which labels are not used as pseudo-labels by specifying -ve class label if score < pos_th

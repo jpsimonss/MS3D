@@ -45,6 +45,13 @@ if __name__ == '__main__':
                                                                     refine_cfg=ms3d_configs['TEMPORAL_REFINEMENT'],
                                                                     save_dir=ms3d_configs['SAVE_DIR'] if args.save_veh_intermediate_tracks else None)
 
+    '''NEW by JP'''
+    # Get cyclist labels
+    print('NOT YET Refining cyclist labels')
+    '''NEW by JP'''
+    
+    
+    
     # Get pedestrian labels
     print('Refining pedestrian labels')
     tracks_ped = ms3d_utils.refine_ped_labels(tracks_ped, 
