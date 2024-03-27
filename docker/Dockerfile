@@ -1,5 +1,6 @@
 # FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04 # ORIGINAL
-FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04 
+# FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04 
+FROM nvidia/cuda:11.3.1-cudnn8-devel-ubuntu20.04
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
@@ -37,8 +38,9 @@ RUN PIP_INSTALL="python3 -m pip --no-cache-dir install" && \
 # EERST = 1.7 & 0.8.1
 # RUN pip install --user torch==1.8.1 torchvision==0.9.1 -f https://download.pytorch.org/whl/cu111/torch_stable.html && \
     #pip install torch-scatter==2.1.0
-RUN pip3 install --no-cache-dir torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
-#RUN pip install --no-cache-dir torch-scatter -f https://pytorch-geometric.com/whl/torch-1.9.0+cu111.html 
+# RUN pip3 install --no-cache-dir torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip3 install --no-cache-dir torch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 -f https://data.pyg.org/whl/torch-1.12.1+cu113.html && \
+    pip install torch-scatter==2.1.0 -f https://data.pyg.org/whl/torch-1.12.1+cu113.html
 
 # Install python packages
 RUN PIP_INSTALL="python3 -m pip --no-cache-dir install" && \
