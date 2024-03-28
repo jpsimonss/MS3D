@@ -3,7 +3,7 @@
 # Modify these paths and GPU ids
 DATA_PATH="/media/jp/T7_opslag/data/MS3D_data"
 CODE_PATH="/home/jp/thesis_ws/MS3D"
-GPU_ID="0"
+GPU_ID="0,1"
 ENVS="  --env=NVIDIA_VISIBLE_DEVICES=$GPU_ID
         --env=CUDA_VISIBLE_DEVICES=$GPU_ID
         --env=NVIDIA_DRIVER_CAPABILITIES=all"
@@ -30,7 +30,9 @@ docker run -d -it \
 	--gpus $GPU_ID \
 	--net=host \
 	--ipc=host \
-	--shm-size=30G \
+	--shm-size=12G \
 	--workdir=/MS3D \
 	--name=$container_name \
 	$docker_image   
+
+# ORIGINAL: shm-size=30G
