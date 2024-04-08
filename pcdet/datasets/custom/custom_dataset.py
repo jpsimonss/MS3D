@@ -204,7 +204,12 @@ def create_infos(data_path):
         sample_file_list = sorted(list((seq_dir / seq_name / 'lidar').glob('*')))
         seq_lidar_odom = np.load(str(seq_dir / seq_name / 'lidar_odom.npy'))
         for frame_idx, fname in enumerate(sample_file_list):
-            lidar_timestamp = np.int64(''.join(fname.stem.split('_')))                        
+            
+            try:
+                lidar_timestamp = np.int64(''.join(fname.stem.split('_')))
+            except ValueError:
+                lidar_timestamp = np.uint64(''.join(fname.stem.split('-')))                      
+            
             frame_info = {}
             frame_info['frame_id'] = str(lidar_timestamp)
             frame_info['timestamp'] = lidar_timestamp

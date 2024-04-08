@@ -1,5 +1,3 @@
-# FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04 # ORIGINAL
-# FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04 
 FROM nvidia/cuda:11.3.1-cudnn8-devel-ubuntu20.04
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
@@ -34,11 +32,6 @@ RUN PIP_INSTALL="python3 -m pip --no-cache-dir install" && \
     $PIP_INSTALL numpy==1.24.4 llvmlite==0.41.1 numba==0.58.1
 
 # Install torch, torchvision & torch-scatter
-# Originally used: torch 1.6 and torchvision 0.7.0
-# EERST = 1.7 & 0.8.1
-# RUN pip install --user torch==1.8.1 torchvision==0.9.1 -f https://download.pytorch.org/whl/cu111/torch_stable.html && \
-    #pip install torch-scatter==2.1.0
-# RUN pip3 install --no-cache-dir torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
 RUN pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113 && \
     pip install torch-scatter==2.1.0 -f https://data.pyg.org/whl/torch-1.12.1+cu113.html
 
@@ -65,8 +58,12 @@ RUN pip install setuptools==65.7.0 \
     ipykernel \
     opencv-python==4.9.0.80 \
     open3d \
-    spconv-cu111
+    spconv-cu111 ] \
+    kiss-icp[all]
+    
 RUN apt-get update && apt-get install -y \
     ffmpeg \
     libsm6 \
     libxext6
+    
+WORKDIR /MS3D

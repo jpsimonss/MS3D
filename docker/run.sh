@@ -15,9 +15,8 @@ VISUAL="        --env=DISPLAY
 xhost +local:docker
 echo "Running the docker image [GPUS: ${GPU_ID}]"
 
-# docker_image="darrenjkt/openpcdet:v0.6.0"
-docker_image="ms3d/jp:laptop"
-container_name="ms3d_jplaptop_container"
+docker_image="jpsimons95/ms3d_cuda_11.3.1-cudnn8"
+container_name="ms3d_cuda113_container"
 
 # Start docker image
 docker run -d -it \

@@ -1,8 +1,8 @@
 DATASET: 'CustomDataset'
-DATA_PATH: '../data/sydney_ouster'
-SHIFT_COOR: [0.0, 0.0, 1.8] # change this according to your lidar height above ground
+DATA_PATH: '../data/2024_04_03'
+SHIFT_COOR: [0.0, 0.0, 0.0] # change this according to your lidar height above ground
 POINT_CLOUD_RANGE: [-75.2, -75.2, -2, 75.2, 75.2, 4]
-MAX_SWEEPS: 4
+MAX_SWEEPS: 5
 
 DATA_SPLIT: {
     'train': train,
