@@ -58,7 +58,7 @@ RUN pip install setuptools==65.7.0 \
     ipykernel \
     opencv-python==4.9.0.80 \
     open3d \
-    spconv-cu111 ] \
+    spconv-cu111 \
     kiss-icp[all]
     
 RUN apt-get update && apt-get install -y \

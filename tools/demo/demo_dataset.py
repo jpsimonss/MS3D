@@ -26,8 +26,12 @@ class DemoDataset(DatasetTemplate):
         self.root_path = Path(root_path) 
         self.ext = ext       
         self.max_sweeps = sweeps 
-        self.sample_file_list = sorted(glob.glob(str(self.root_path / 'lidar' / f'*{self.ext}')))    
-        self.lidar_timestamps = [np.int64(''.join(Path(fname).stem.split('_'))) for fname in self.sample_file_list]    
+        self.sample_file_list = sorted(glob.glob(str(self.root_path / 'lidar' / f'*{self.ext}')))
+        try:    
+            self.lidar_timestamps = [np.int64(''.join(Path(fname).stem.split('_'))) for fname in self.sample_file_list]
+        except ValueError:
+            self.lidar_timestamps = [np.uint64(''.join(Path(fname).stem.split('-'))) for fname in self.sample_file_list]
+            
         self.lidar_odom = self.load_lidar_odom()
         self.frameid_to_idx = {}
         self.seq_name_to_len = {}
@@ -42,7 +46,10 @@ class DemoDataset(DatasetTemplate):
         """
         infos = []
         for idx, fname in enumerate(self.sample_file_list):
-            lidar_timestamp = np.int64(''.join(Path(fname).stem.split('_')))                        
+            try:
+                lidar_timestamp = np.int64(''.join(Path(fname).stem.split('_')))
+            except ValueError:
+                lidar_timestamp = np.uint64(''.join(Path(fname).stem.split('-')))             
             frame_info = {}
             frame_info['frame_id'] = str(lidar_timestamp)
             frame_info['timestamp'] = lidar_timestamp

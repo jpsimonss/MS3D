@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Modify these paths and GPU ids
-DATA_PATH="/media/jp/T7_opslag1/data/MS3D_data"
+DATA_PATH="/media/jp/T7_opslag2/data/MS3D_data"
 CODE_PATH="/home/jp/thesis_ws/MS3D"
 GPU_ID="0"
 ENVS="  --env=NVIDIA_VISIBLE_DEVICES=$GPU_ID

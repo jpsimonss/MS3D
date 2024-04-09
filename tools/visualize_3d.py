@@ -142,6 +142,7 @@ def main():
                                 ref_labels=[1 for i in range(len(det_anno['boxes_lidar'][det_anno['score'] > 0.2]))],
                                 gt_boxes=gt_boxes if args.show_gt else None, use_class_colors=args.use_class_colors,
                                 draw_origin=False, use_linemesh=args.use_linemesh)
+        
         if args.ps_pkl is not None:
             with open(args.ps_pkl,'rb') as f:
                 ps_dict = pickle.load(f)
@@ -167,7 +168,11 @@ def main():
                                 ref_scores=ps_dict[frame_id]['gt_boxes'][:,8][ps_dict[frame_id]['gt_boxes'][:,8] > 0.4], 
                                 ref_labels=list(abs(ps_dict[frame_id]['gt_boxes'][:,7][ps_dict[frame_id]['gt_boxes'][:,8] > 0.4].astype(int))),
                                 gt_boxes=data_dict['gt_boxes'][0] if args.show_gt else None, 
-                                draw_origin=False, use_linemesh=args.use_linemesh, use_class_colors=args.use_class_colors,)
+                                draw_origin=False, use_linemesh=args.use_linemesh, use_class_colors=args.use_class_colors,
+                                save=True, save_path=f'{args.save_video_dir}/frame-{idx}.jpg',
+                                show=False)
+                
+        
         else:                        
             det_annos = box_fusion_utils.load_src_paths_txt(args.dets_txt)
             src_keys = list(det_annos.keys())
@@ -191,6 +196,8 @@ def main():
                                           det_annos=det_annos,                                        
                                           gt_boxes=gt_boxes if args.show_gt else None,
                                           use_linemesh=args.use_linemesh)
+    
+
             
     else:
         # Load trained model for inference

@@ -194,6 +194,7 @@ def visualize_bev(target_set, idx, ps_dict=None, ps_dict2=None, detection_sets=N
     frame_id = target_set.infos[idx]['frame_id']
     pts = get_lidar(target_set, frame_id)    
     limit_range = [-point_cloud_range, -point_cloud_range, -4.0, point_cloud_range, point_cloud_range, 2.0]
+    # limit_range = [-int(point_cloud_range * 0.5), -int(point_cloud_range * 1.0), -4.0, (point_cloud_range * 1.0), (point_cloud_range * 1.0), 2.0]
     mask = mask_points_by_range(pts, limit_range)
     fig = plt.figure(figsize=figsize)
     ax = plt.subplot(111)

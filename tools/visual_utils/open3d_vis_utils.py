@@ -95,10 +95,13 @@ def draw_scenes_msda(points, idx, gt_boxes, det_annos, draw_origin=False, min_sc
     vis.destroy_window()
 
 def draw_scenes(points=None, gt_boxes=None, ref_boxes=None, ref_boxes2=None, ref_labels=None, ref_scores=None, ref_box_colors=None, 
-                point_colors=None, draw_origin=False, use_linemesh=False,use_class_colors=True):
+                point_colors=None, draw_origin=False, use_linemesh=False,use_class_colors=True, save=False, save_path=None, show=True):
 
     vis = open3d.visualization.Visualizer()
-    vis.create_window()
+    if show:
+        vis.create_window()
+    else:
+        vis.create_window(visible=False)
 
     geom = get_geometries(points, gt_boxes=gt_boxes, 
                           ref_boxes=ref_boxes, ref_boxes2=ref_boxes2, ref_labels=ref_labels, 
@@ -109,15 +112,16 @@ def draw_scenes(points=None, gt_boxes=None, ref_boxes=None, ref_boxes2=None, ref
     for g in geom:                
         vis.add_geometry(g)
     
-    ctr = vis.get_view_control()  
+    ctr = vis.get_view_control()
 
     # Default open3d view. If you wish to change, press Ctrl+C while the open3D window is 
     # open to copy the viewing angle, then replace these numbers below
-    ctr.set_front([ -0.009079385782427972, -0.79382993606647601, 0.60807203303433444 ])
-    ctr.set_lookat([ 0.13592805125144847, 25.565951040207825, -13.855443454771956  ])
-    ctr.set_up([-0.008889802784222859, 0.60813714531420293, 0.79378220180068892 ])
-    ctr.set_zoom(0.21999999999999992)
+    ctr.set_front([ -0.82734944551612055, -0.41036209144638452, 0.38353076657279678 ])
+    ctr.set_lookat([ 17.732317240730936, 10.585682230511246, -8.6685406495955561 ])
+    ctr.set_up([ 0.35809488697206543, 0.14070040055552641, 0.92302299495081819 ])
+    ctr.set_zoom(0.17999999999999994)
     vis.get_render_option().point_size = 2.0    
+
 
     # Original, zoom in, ego vehicle moving towards
     # ctr.set_front([ 0.59083558928204927, 0.44198102848405585, 0.6749563518464804 ])
@@ -131,9 +135,18 @@ def draw_scenes(points=None, gt_boxes=None, ref_boxes=None, ref_boxes2=None, ref
     # ctr.set_up([ -0.55585420737713021, 0.34547108891144618, 0.75609247243143607 ])
     # ctr.set_zoom(0.21900000000000003)
 
+    # New by JP
+    if save:
+        import os
+        if save_path is None:
+            os.mkdir('video')
+            save_path = 'video'
+        print(f'Saving frame as .jpg to {save_path}')
+        vis.capture_screen_image(save_path, do_render=True)
     
-    vis.run()
-    vis.destroy_window()
+    if show:
+        vis.run()
+        vis.destroy_window()
 
 def get_geometries(points, gt_boxes=None, ref_boxes=None, ref_labels=None, ref_boxes2=None, 
                    ref_scores=None, ref_box_colors=None, point_colors=None, use_class_colors=True,
